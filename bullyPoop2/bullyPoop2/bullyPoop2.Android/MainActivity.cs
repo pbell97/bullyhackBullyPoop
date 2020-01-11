@@ -6,12 +6,17 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
+
+using bullyPoop2.Droid.Resources;
 
 namespace bullyPoop2.Droid
 {
     [Activity(Label = "bullyPoop", Icon = "@mipmap/bp_icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -31,13 +36,50 @@ namespace bullyPoop2.Droid
             {
                 label.Text = "Hello there";
             };
-            
+
+            HomePage();
+
+
+
+
+
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+
+        public void HomePage()
+        {
+            SetContentView(Resource.Layout.homePage);
+            var bathroomListView = FindViewById<ListView>(Resource.Id.homePageBathroomsList);
+            var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
+
+            addBathroomButton.Click += (sender, e) =>
+            {
+                //Change Content View
+                Console.WriteLine("Clicked Add Bathroom");
+            };
+
+            var bathrooms = new List<Bathroom>();
+            var bathroomNames = new List<String>();
+
+            bathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
+            bathrooms.Add(new Bathroom("Union", 1, 2, true, 8, 8));
+
+
+            for (var i = 0; i < bathrooms.Count; i++)
+            {
+                var name = bathrooms[i].building + " - Floor " + bathrooms[i].floor;
+                if (bathrooms[i].number > 1) name += " - #" + bathrooms[i].number;
+                bathroomNames.Add(name);
+            }
+
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, bathroomNames);
+            bathroomListView.Adapter = adapter;
         }
     }
 }
