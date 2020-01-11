@@ -15,7 +15,6 @@
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
-    <AndroidUseLatestPlatformSdk>false</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v9.0</TargetFrameworkVersion>
     <AndroidEnableSGenConcurrent>true</AndroidEnableSGenConcurrent>
     <AndroidUseAapt2>true</AndroidUseAapt2>
@@ -87,7 +86,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\bullyPoop2\bullyPoop2.csproj">
-      <Project>{6BE08A58-626B-44F7-915F-31ECDBDD3609}</Project>
+      <Project>{E1577040-2815-4CF5-B15C-CAFD3B954B6B}</Project>
       <Name>bullyPoop2</Name>
     </ProjectReference>
   </ItemGroup>
