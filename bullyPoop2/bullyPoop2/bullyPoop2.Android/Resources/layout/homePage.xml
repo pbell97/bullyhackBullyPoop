@@ -45,19 +45,19 @@
 			android:text="Home"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button1" />
+			android:id="@+id/buttonHome" />
 		<Button
 			android:text="Map"
             android:translationX="200px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button2" />
+			android:id="@+id/buttonMap" />
 		<Button
 			android:text="Account"
             android:translationX="380px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button3" />
+			android:id="@+id/buttonAccount" />
 
 
     </LinearLayout>

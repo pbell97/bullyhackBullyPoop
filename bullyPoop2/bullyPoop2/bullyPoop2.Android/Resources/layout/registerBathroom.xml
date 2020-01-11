@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.ContentFrameLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:minWidth="25px"
+	android:minHeight="25px"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:id="@+id/contentFrameLayout1">
+
+
+
+	<LinearLayout
+		android:orientation="horizontal"
+		android:translationY="1520px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="200px"
+		android:id="@+id/linearLayout2"
+		android:baselineAligned="true"
+		android:foreground="#ffe65100">
+		<Button
+			android:text="Home"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/button1" />
+		<Button
+			android:text="Map"
+			android:translationX="200px"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/button2" />
+		<Button
+			android:text="Account"
+			android:translationX="380px"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/button3" />
+
+
+	</LinearLayout>
+
+
+</android.support.v7.widget.ContentFrameLayout>
