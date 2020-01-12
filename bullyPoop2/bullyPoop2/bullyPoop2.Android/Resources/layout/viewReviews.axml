@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent">
+	<TextView
+		android:text="Bathroom Name"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/bathroomNameViewReviews" />
+	<TextView
+		android:text="Rating: x Stars"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:id="@+id/bathroomRating" />
+	<ListView
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="1400px"
+		android:id="@+id/reviewsListViewReviews" />
+
+    <LinearLayout
+		android:orientation="horizontal"
+		android:translationY="0px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="200px"
+		android:id="@+id/linearLayoutAddReview4">
+        <Button
+			android:text="Home"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/buttonHomeAddReview" />
+		<Button
+			android:text="Map"
+			android:translationX="200px"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/buttonMapAddReview" />
+		<Button
+			android:text="Account"
+			android:translationX="380px"
+			android:layout_width="wrap_content"
+			android:layout_height="150px"
+			android:id="@+id/buttonAccountAddReview" />
+	</LinearLayout>
+</LinearLayout>

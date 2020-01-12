@@ -7,17 +7,15 @@ namespace bullyPoop2.Droid.Resources
         public Bathroom bathroom;
         public int rating;
         public string review;
-        // TODO: Add user
+        public User user;
 
-        public Review(string building, Bathroom bathroom, int rating, string review)
+        public Review(string building, Bathroom bathroom, int rating, string review, User user)
         {
             this.building = building;
             this.bathroom = bathroom;
             this.review = review;
             this.rating = rating;
-
-            // TODO: Add User
-            
+            this.user = user;            
         }
 }
 }

@@ -20,6 +20,7 @@ namespace bullyPoop2.Droid
         List<string> buildings;
         List<Review> reviews;
 
+        User currentUser;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -27,6 +28,9 @@ namespace bullyPoop2.Droid
             allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
             buildings = new List<string>();
             reviews = new List<Review>();
+
+            currentUser = new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
+
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -82,11 +86,7 @@ namespace bullyPoop2.Droid
                 accountPage();
             };
 
-            var bathrooms = new List<Bathroom>();
             var bathroomNames = new List<String>();
-
-            bathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
-            bathrooms.Add(new Bathroom("Union", 1, 2, true, 8, 8));
 
 
             for (var i = 0; i < allBathrooms.Count; i++)
@@ -98,6 +98,12 @@ namespace bullyPoop2.Droid
 
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, bathroomNames);
             bathroomListView.Adapter = adapter;
+
+            bathroomListView.ItemClick += (sender, e) =>
+            {
+                string selectedBathroom = ((ListView)sender).GetItemAtPosition(e.Position).ToString();
+                viewReviews(allBathrooms[getBathroomIndexFromName(selectedBathroom)]);
+            };
         }
 
 
@@ -159,25 +165,10 @@ namespace bullyPoop2.Droid
                 var bathroomSpinner = FindViewById<Spinner>(Resource.Id.spinnerBathroomAddReview);
                 Spinner spinner2 = (Spinner)bathroomSpinner;
                 var selectedBathroom = spinner2.SelectedItem.ToString();
-
-                var building = selectedBathroom.Split(" - Floor ")[0];
-                var temp = selectedBathroom.Split(" - Floor ")[1].Split(" - #");
-                var floor = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[0]);
-                var number = 1;
                 Bathroom reviewedBathroom = null;
-                if (selectedBathroom.Split(" - Floor ")[1].Split(" - #").Length > 1)
-                {
-                    number = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[1]);
-                } 
-                for (var i = 0; i < allBathrooms.Count; i++)
-                {
-                    if (allBathrooms[i].building == building && allBathrooms[i].floor == floor && allBathrooms[i].number == number)
-                    {
-                        reviewedBathroom = allBathrooms[i];
-                        continue;
-                    }
-                }
-                Review review = new Review(building, reviewedBathroom, rating, reviewText);
+                reviewedBathroom = allBathrooms[getBathroomIndexFromName(selectedBathroom)];
+
+                Review review = new Review(reviewedBathroom.building, reviewedBathroom, rating, reviewText, currentUser);
                 reviews.Add(review);
                 HomePage();
 
@@ -212,18 +203,68 @@ namespace bullyPoop2.Droid
         {
             SetContentView(Resource.Layout.accountPage);
 
-            var currentUser = new List<User>();
-            currentUser.Add(new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor"));
-
             var showUser = FindViewById<TextView>(Resource.Id.showUser);
             var showSex = FindViewById<TextView>(Resource.Id.showSex);
             var showEmail = FindViewById<TextView>(Resource.Id.showEmail);
 
-            showUser.Text = currentUser[0].username;
-            showSex.Text = currentUser[0].sex;
-            showEmail.Text = currentUser[0].email;
+            showUser.Text = currentUser.username;
+            showSex.Text = currentUser.sex;
+            showEmail.Text = currentUser.email;
+        }
+
+        public int getBathroomIndexFromName(string name)
+        {
+            var selectedBathroom = name;
+
+            var building = selectedBathroom.Split(" - Floor ")[0];
+            var temp = selectedBathroom.Split(" - Floor ")[1].Split(" - #");
+            var floor = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[0]);
+            var number = 1;
+            if (selectedBathroom.Split(" - Floor ")[1].Split(" - #").Length > 1)
+            {
+                number = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[1]);
+            }
+            for (var i = 0; i < allBathrooms.Count; i++)
+            {
+                if (allBathrooms[i].building == building && allBathrooms[i].floor == floor && allBathrooms[i].number == number)
+                {
+                    return i;
+                }
+            }
+
+            return -1000;
+        }
+
+        public string createBathroomName(Bathroom bathroom){
+            var name = bathroom.building + " - Floor " + bathroom.floor;
+            if (bathroom.number > 1) name += " - #" + bathroom.number;
+            return name;
+        }
+
+        public void viewReviews(Bathroom bathroom)
+        {
+            SetContentView(Resource.Layout.viewReviews);
+            FindViewById<TextView>(Resource.Id.bathroomNameViewReviews).Text = createBathroomName(bathroom);
+            FindViewById<TextView>(Resource.Id.bathroomRating).Text = "Rating: " + "5" + " stars";
+
+            var reviewsListView = FindViewById<ListView>(Resource.Id.reviewsListViewReviews);
+            var reviewsToAdd = new List<string>();
+            string latestReview;
+            for (var i = 0; i < reviews.Count; i++)
+            {
+                if (reviews[i].bathroom.UID == bathroom.UID)
+                {
+                    latestReview = "Username: " + reviews[i].user.username + "\n" + "Rating: " + reviews[i].rating + "\n" + "Description: " + reviews[i].review + "\n";
+                    reviewsToAdd.Add(latestReview);
+                }
+            }
+
+
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, reviewsToAdd);
+            reviewsListView.Adapter = adapter;
 
 
         }
+
     }
 }
