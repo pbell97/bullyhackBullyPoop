@@ -31,18 +31,18 @@
 			android:text="Home"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/buttonHomeAddReview" />
+			android:id="@+id/buttonHomeViewReview" />
 		<Button
 			android:text="Map"
 			android:translationX="200px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/buttonMapAddReview" />
+			android:id="@+id/buttonMapViewReview" />
 		<Button
 			android:text="Account"
 			android:translationX="380px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/buttonAccountAddReview" />
+			android:id="@+id/buttonAccountViewReview" />
 	</LinearLayout>
 </LinearLayout>

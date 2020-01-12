@@ -10,6 +10,10 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
 using bullyPoop2.Droid.Resources;
+using System.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace bullyPoop2.Droid
 {
@@ -19,17 +23,52 @@ namespace bullyPoop2.Droid
         List<Bathroom> allBathrooms;
         List<string> buildings;
         List<Review> reviews;
-
+        SecureStorageHelper storageHelper;
+        WebRequestHelper webHelper;
         User currentUser;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            storageHelper = new SecureStorageHelper();
+            webHelper = new WebRequestHelper("http://35.196.91.227");
+
+            //var result = webHelper.getRequest("/bathrooms");
+            //result.Replace("\n", "");
+
+            //JsonConvert.SerializeObject(blank);
+            //JsonConvert.DeserializeObject<User>(currentUser);
+
+            //JObject json = JObject.Parse(result);
+            //Console.WriteLine(json[0]);
+
+
+            currentUser = storageHelper.GetItem<User>("currentUser");
+
+
+
+
             allBathrooms = new List<Bathroom>();
-            allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
+            allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4, "M"));
             buildings = new List<string>();
             reviews = new List<Review>();
 
-            currentUser = new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
+            //webHelper.postRequest("/bathrooms", JsonConvert.SerializeObject(allBathrooms[0]));
+
+            if (currentUser == null) currentUser = new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
+            storageHelper.StoreItem<User>("currentUser", currentUser);
+
+            // TODO: Should be populated by database...
+            buildings.Add("Lee Hall"); buildings.Add("Union"); buildings.Add("Allen"); buildings.Add("Library"); buildings.Add("Carpenter"); buildings.Add("McCain");
+            buildings.Add("Butler"); buildings.Add("Chapel of Memories"); buildings.Add("Simral"); buildings.Add("Barnes & Nobel");
+
+            for (var i = 0; i < allBathrooms.Count; i++)
+            {
+                if (!buildings.Contains(allBathrooms[i].building))
+                {
+                    buildings.Add(allBathrooms[i].building);
+                }
+            }
+
 
             base.OnCreate(savedInstanceState);
 
@@ -37,23 +76,7 @@ namespace bullyPoop2.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
 
-            SetContentView(Resource.Layout.mainLayout);
-            var button = FindViewById<Button>(Resource.Id.firstButton);
-            var label = FindViewById<TextView>(Resource.Id.firstLabel);
-
-            button.Click += (sender, e) =>
-            {
-                label.Text = "Hello there";
-            };
-
-
-            this.buildings.Add("Union");
-            this.buildings.Add("Butler");
-            this.buildings.Add("Lee Hall");
-
             HomePage();
-
-
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
@@ -91,8 +114,10 @@ namespace bullyPoop2.Droid
 
             for (var i = 0; i < allBathrooms.Count; i++)
             {
-                var name = allBathrooms[i].building + " - Floor " + allBathrooms[i].floor;
-                if (allBathrooms[i].number > 1) name += " - #" + allBathrooms[i].number;
+                var name = createBathroomName(allBathrooms[i]);
+                string stars = string.Join("", Enumerable.Repeat("🚽", allBathrooms[i].getAvgRating(reviews)));
+                if (stars == "") stars = "💩";
+                name += "\t\tRating: " + stars;
                 bathroomNames.Add(name);
             }
 
@@ -110,11 +135,20 @@ namespace bullyPoop2.Droid
         public void registerBathroom()
         {
             SetContentView(Resource.Layout.registerBathroom);
+
+            // Navbar
+            FindViewById<Button>(Resource.Id.homeButtonRegisterBathroom).Click += (sender, e) => { HomePage(); };
+            FindViewById<Button>(Resource.Id.mapButtonRegisterBathroom).Click += (sender, e) => { mapPage(); };
+            FindViewById<Button>(Resource.Id.accountButtonRegisterBathroom).Click += (sender, e) => { accountPage(); };
+
             var registerButton = FindViewById<Button>(Resource.Id.buttonRegisterBathroom);
+            var buildingSpinner = FindViewById<Spinner>(Resource.Id.buildingSpinnerRegisterBathroom);
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);
+            buildingSpinner.Adapter = adapter;
 
             registerButton.Click += (sender, e) =>
             {
-                var building = FindViewById<EditText>(Resource.Id.editTextRegisterBuilding).Text;
+                var building = buildingSpinner.SelectedItem.ToString();
                 var floor = FindViewById<EditText>(Resource.Id.editTextRegisterFloor).Text;
                 var number = FindViewById<EditText>(Resource.Id.editTextRegisterNumber).Text;
                 var stallsNumber = FindViewById<EditText>(Resource.Id.editTextRegisterNumberStalls).Text;
@@ -129,8 +163,13 @@ namespace bullyPoop2.Droid
                 else
                 {
                     Console.WriteLine("All fields are completed");
-                    var newBathroom = new Bathroom(building, Int32.Parse(floor), Int32.Parse(number), handicap, Int32.Parse(stallsNumber), Int32.Parse(urinalsNumber));
+                    var newBathroom = new Bathroom(building, Int32.Parse(floor), Int32.Parse(number), handicap, Int32.Parse(stallsNumber), Int32.Parse(urinalsNumber), currentUser.sex);
                     allBathrooms.Add(newBathroom);
+
+                    if (!buildings.Contains(newBathroom.building))
+                    {
+                        buildings.Add(newBathroom.building);
+                    }
 
                     // TODO On successful submit...
                     HomePage();
@@ -141,6 +180,12 @@ namespace bullyPoop2.Droid
         public void addReview()
         {
             SetContentView(Resource.Layout.addReview);
+
+            // Navbar
+            FindViewById<Button>(Resource.Id.buttonHomeAddReview).Click += (sender, e) => { HomePage(); };
+            FindViewById<Button>(Resource.Id.buttonMapAddReview).Click += (sender, e) => { mapPage(); };
+            FindViewById<Button>(Resource.Id.buttonAccountAddReview).Click += (sender, e) => { accountPage(); };
+
             var spinner = FindViewById<Spinner>(Resource.Id.spinnerBuildingAddReview);
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);
             spinner.Adapter = adapter;
@@ -168,7 +213,7 @@ namespace bullyPoop2.Droid
                 Bathroom reviewedBathroom = null;
                 reviewedBathroom = allBathrooms[getBathroomIndexFromName(selectedBathroom)];
 
-                Review review = new Review(reviewedBathroom.building, reviewedBathroom, rating, reviewText, currentUser);
+                Review review = new Review(reviewedBathroom.building, reviewedBathroom.UID, rating, reviewText, currentUser);
                 reviews.Add(review);
                 HomePage();
 
@@ -203,6 +248,12 @@ namespace bullyPoop2.Droid
         {
             SetContentView(Resource.Layout.accountPage);
 
+            // Navbar
+            FindViewById<Button>(Resource.Id.buttonHomeAccountPage).Click += (sender, e) => { HomePage(); };
+            FindViewById<Button>(Resource.Id.buttonMapAccountPage).Click += (sender, e) => { mapPage(); };
+            FindViewById<Button>(Resource.Id.buttonAccountAccountPage).Click += (sender, e) => { accountPage(); };
+
+
             var showUser = FindViewById<TextView>(Resource.Id.showUser);
             var showSex = FindViewById<TextView>(Resource.Id.showSex);
             var showEmail = FindViewById<TextView>(Resource.Id.showEmail);
@@ -210,6 +261,25 @@ namespace bullyPoop2.Droid
             showUser.Text = currentUser.username;
             showSex.Text = currentUser.sex;
             showEmail.Text = currentUser.email;
+
+
+            var listView = FindViewById<ListView>(Resource.Id.reviewsListAccountPage);
+
+            var reviewsToAdd = new List<string>();
+            string latestReview;
+            for (var i = 0; i < reviews.Count; i++)
+            {
+                if (reviews[i].user.username == currentUser.username)
+                {
+                    latestReview = "Username: " + reviews[i].user.username + "\n" + "Rating: " + reviews[i].rating + "\n" + "Description: " + reviews[i].review + "\n";
+                    reviewsToAdd.Add(latestReview);
+                }
+            }
+
+
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, reviewsToAdd);
+            listView.Adapter = adapter;
+
         }
 
         public int getBathroomIndexFromName(string name)
@@ -218,7 +288,7 @@ namespace bullyPoop2.Droid
 
             var building = selectedBathroom.Split(" - Floor ")[0];
             var temp = selectedBathroom.Split(" - Floor ")[1].Split(" - #");
-            var floor = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[0]);
+            var floor = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[0].Split("\t")[0]);
             var number = 1;
             if (selectedBathroom.Split(" - Floor ")[1].Split(" - #").Length > 1)
             {
@@ -244,15 +314,23 @@ namespace bullyPoop2.Droid
         public void viewReviews(Bathroom bathroom)
         {
             SetContentView(Resource.Layout.viewReviews);
+
+            // Navbar
+            FindViewById<Button>(Resource.Id.buttonHomeViewReview).Click += (sender, e) => { HomePage(); };
+            FindViewById<Button>(Resource.Id.buttonMapViewReview).Click += (sender, e) => { mapPage(); };
+            FindViewById<Button>(Resource.Id.buttonAccountViewReview).Click += (sender, e) => { accountPage(); };
+
             FindViewById<TextView>(Resource.Id.bathroomNameViewReviews).Text = createBathroomName(bathroom);
-            FindViewById<TextView>(Resource.Id.bathroomRating).Text = "Rating: " + "5" + " stars";
+            string stars = string.Join("", Enumerable.Repeat("🚽", bathroom.getAvgRating(reviews)));
+            if (stars == "") stars = "0 Toilets Stars";
+            FindViewById<TextView>(Resource.Id.bathroomRating).Text = "Rating: " + stars;
 
             var reviewsListView = FindViewById<ListView>(Resource.Id.reviewsListViewReviews);
             var reviewsToAdd = new List<string>();
             string latestReview;
             for (var i = 0; i < reviews.Count; i++)
             {
-                if (reviews[i].bathroom.UID == bathroom.UID)
+                if (reviews[i].bathroomId == bathroom.UID)
                 {
                     latestReview = "Username: " + reviews[i].user.username + "\n" + "Rating: " + reviews[i].rating + "\n" + "Description: " + reviews[i].review + "\n";
                     reviewsToAdd.Add(latestReview);
@@ -262,8 +340,10 @@ namespace bullyPoop2.Droid
 
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, reviewsToAdd);
             reviewsListView.Adapter = adapter;
+        }
 
-
+        public void mapPage() {
+            Console.WriteLine("Would be going to map page");
         }
 
     }
