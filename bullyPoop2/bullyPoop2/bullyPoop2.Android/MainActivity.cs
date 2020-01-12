@@ -43,23 +43,38 @@ namespace bullyPoop2.Droid
 
 
             currentUser = storageHelper.GetItem<User>("currentUser");
+            allBathrooms = storageHelper.GetItem<List<Bathroom>>("allBathrooms");
+            buildings = storageHelper.GetItem<List<string>>("buildings");
+            reviews = storageHelper.GetItem<List<Review>>("reviews");
+            if (allBathrooms == null)
+            {
+                allBathrooms = new List<Bathroom>();
+                allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4, "M"));
+            }
+            if (buildings == null)
+            {
+                buildings = new List<string>();
+                buildings.Add("Lee Hall"); buildings.Add("Union"); buildings.Add("Allen"); buildings.Add("Library"); buildings.Add("Carpenter"); buildings.Add("McCain");
+                buildings.Add("Butler"); buildings.Add("Chapel of Memories"); buildings.Add("Simral"); buildings.Add("Barnes & Nobel");
+            }
+            if (reviews == null)
+            {
+                reviews = new List<Review>();
+            }
 
-
-
-
-            allBathrooms = new List<Bathroom>();
-            allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4, "M"));
-            buildings = new List<string>();
-            reviews = new List<Review>();
-
-            //webHelper.postRequest("/bathrooms", JsonConvert.SerializeObject(allBathrooms[0]));
-
-            if (currentUser == null) currentUser = new User("Bully", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
+            //if (currentUser == null)
+            currentUser = new User("Bully", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
             storageHelper.StoreItem<User>("currentUser", currentUser);
 
+
+
+            //webHelper.postRequest("/bathrooms", JsonConvert.SerializeObject(allBathrooms[0]));
+            //string result2 = webHelper.getRequest("/bathrooms").Replace(System.Environment.NewLine, "").Replace("\\", "").Substring(1);
+            //result2 = result2.Substring(0, result2.Length - 1);
+            //List<Bathroom> test = JsonConvert.DeserializeObject<List<Bathroom>>(result2);
+
+
             // TODO: Should be populated by database...
-            buildings.Add("Lee Hall"); buildings.Add("Union"); buildings.Add("Allen"); buildings.Add("Library"); buildings.Add("Carpenter"); buildings.Add("McCain");
-            buildings.Add("Butler"); buildings.Add("Chapel of Memories"); buildings.Add("Simral"); buildings.Add("Barnes & Nobel");
 
             for (var i = 0; i < allBathrooms.Count; i++)
             {
@@ -88,6 +103,7 @@ namespace bullyPoop2.Droid
 
         public void HomePage()
         {
+            saveData();
             SetContentView(Resource.Layout.homePage);
             var bathroomListView = FindViewById<ListView>(Resource.Id.homePageBathroomsList);
             var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
@@ -346,5 +362,12 @@ namespace bullyPoop2.Droid
             Console.WriteLine("Would be going to map page");
         }
 
+
+        public void saveData()
+        {
+            storageHelper.StoreItem<List<Bathroom>>("allBathrooms", allBathrooms);
+            storageHelper.StoreItem<List<string>>("buildings", buildings);
+            storageHelper.StoreItem<List<Review>>("reviews", reviews);
+        }
     }
 }
