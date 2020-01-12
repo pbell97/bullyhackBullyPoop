@@ -57,11 +57,17 @@ namespace bullyPoop2.Droid
             SetContentView(Resource.Layout.homePage);
             var bathroomListView = FindViewById<ListView>(Resource.Id.homePageBathroomsList);
             var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
 
             addBathroomButton.Click += (sender, e) =>
             {
                 //Change Content View
                 Console.WriteLine("Clicked Add Bathroom");
+            };
+
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
             };
 
             var bathrooms = new List<Bathroom>();
@@ -80,6 +86,24 @@ namespace bullyPoop2.Droid
 
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, bathroomNames);
             bathroomListView.Adapter = adapter;
+        }
+
+        public void accountPage()
+        {
+            SetContentView(Resource.Layout.accountPage);
+
+            var currentUser = new List<User>();
+            currentUser.Add(new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor"));
+
+            var showUser = FindViewById<TextView>(Resource.Id.showUser);
+            var showSex = FindViewById<TextView>(Resource.Id.showSex);
+            var showEmail = FindViewById<TextView>(Resource.Id.showEmail);
+
+            showUser.Text = currentUser[0].username;
+            showSex.Text = currentUser[0].sex;
+            showEmail.Text = currentUser[0].email;
+
+
         }
     }
 }
