@@ -9,7 +9,141 @@
 	android:id="@+id/contentFrameLayout1">
 
 
+	<LinearLayout
+		android:orientation="horizontal"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout3">
+		<TextView
+			android:text="Building"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView1" />
+		<EditText
+			android:inputType="text"
+			android:layout_width="219.0dp"
+			android:layout_height="51.0dp"
+			android:id="@+id/editTextRegisterBuilding" />
 
+        </LinearLayout>
+
+    <LinearLayout
+		android:orientation="horizontal"
+        android:translationY="150px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout4">
+        <TextView
+			android:text="Floor"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView2" />
+		<EditText
+			android:inputType="number"
+			android:layout_width="219.0dp"
+			android:layout_height="51.0dp"
+			android:id="@+id/editTextRegisterFloor" />
+	</LinearLayout>
+
+    <LinearLayout
+		android:orientation="horizontal"
+        android:translationY="300px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout5">
+        <TextView
+			android:text="Number"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView3" />
+		<EditText
+			android:inputType="number"
+			android:layout_width="219.0dp"
+			android:layout_height="51.0dp"
+			android:id="@+id/editTextRegisterNumber" />
+	</LinearLayout>
+
+    <LinearLayout
+		android:orientation="horizontal"
+        android:translationY="450px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout6">
+        <TextView
+			android:text="Number of Stalls"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView4" />
+		<EditText
+			android:inputType="number"
+			android:layout_width="219.0dp"
+			android:layout_height="51.0dp"
+			android:id="@+id/editTextRegisterNumberStalls" />
+	</LinearLayout>
+
+    <LinearLayout
+		android:orientation="horizontal"
+        android:translationY="600px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout7">
+        <TextView
+			android:text="Number of Urinals"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView5" />
+		<EditText
+			android:inputType="number"
+			android:layout_width="219.0dp"
+			android:layout_height="51.0dp"
+			android:id="@+id/editTextRegisterNumberUrinals" />
+	</LinearLayout>
+
+    <LinearLayout
+		android:orientation="horizontal"
+        android:translationY="750px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:id="@+id/linearLayout8">
+        <TextView
+			android:text="Handicap"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="200px"
+			android:layout_height="wrap_content"
+			android:id="@+id/textView5" />
+		<CheckBox
+			android:text=""
+			android:layout_width="100px"
+			android:layout_height="100px"
+			android:id="@+id/checkBoxHandicap" />
+		
+	</LinearLayout>
+	<Button
+		android:text="Register"
+        android:translationY="1000px"
+        android:translationX="395px"
+        
+		android:layout_width="300px"
+		android:layout_height="300px"
+		android:id="@+id/buttonRegisterBathroom" />
+   
 	<LinearLayout
 		android:orientation="horizontal"
 		android:translationY="1520px"
@@ -17,29 +151,28 @@
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="200px"
-		android:id="@+id/linearLayout2"
-		android:baselineAligned="true"
-		android:foreground="#ffe65100">
+		android:id="@+id/linearLayoutRegisterBathroom"
+		android:baselineAligned="true">
 		<Button
 			android:text="Home"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button1" />
+			android:id="@+id/homeButtonRegisterBathroom" />
 		<Button
 			android:text="Map"
 			android:translationX="200px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button2" />
+			android:id="@+id/mapButtonRegisterBathroom" />
 		<Button
 			android:text="Account"
 			android:translationX="380px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button3" />
-
-
+			android:id="@+id/accountButtonRegisterBathroom" />
 	</LinearLayout>
+	
+	
 
 
 </android.support.v7.widget.ContentFrameLayout>
