@@ -65,7 +65,7 @@ namespace bullyPoop2.Droid
             var bathroomListView = FindViewById<ListView>(Resource.Id.homePageBathroomsList);
             var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
             var addReviewButton = FindViewById<Button>(Resource.Id.buttonAddReviewHomePage);
-
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
             addBathroomButton.Click += (sender, e) =>
             {
                 //Change Content View
@@ -77,8 +77,17 @@ namespace bullyPoop2.Droid
             {
                 addReview();
             };
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
 
+            var bathrooms = new List<Bathroom>();
             var bathroomNames = new List<String>();
+
+            bathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
+            bathrooms.Add(new Bathroom("Union", 1, 2, true, 8, 8));
+
 
             for (var i = 0; i < allBathrooms.Count; i++)
             {
@@ -199,5 +208,22 @@ namespace bullyPoop2.Droid
             spinner2.Adapter = adapter;
         }
 
+        public void accountPage()
+        {
+            SetContentView(Resource.Layout.accountPage);
+
+            var currentUser = new List<User>();
+            currentUser.Add(new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor"));
+
+            var showUser = FindViewById<TextView>(Resource.Id.showUser);
+            var showSex = FindViewById<TextView>(Resource.Id.showSex);
+            var showEmail = FindViewById<TextView>(Resource.Id.showEmail);
+
+            showUser.Text = currentUser[0].username;
+            showSex.Text = currentUser[0].sex;
+            showEmail.Text = currentUser[0].email;
+
+
+        }
     }
 }

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.ContentFrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/contentFrameLayout1">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:translationY="1520px"
+        android:translationX="15px"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:minWidth="125px"
+        android:minHeight="25px">
+        <Button
+            android:text="Log Out"
+            android:layout_width="wrap_content"
+            android:layout_height="150px"
+            android:minWidth="615px"
+            android:minHeight="25px"
+            android:id="@+id/logOut" />
+        <Button
+            android:text="Delete Account"
+            android:layout_width="wrap_content"
+            android:layout_height="150px"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:id="@+id/delAcc" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:translationY="720px"
+        android:translationX="35px"
+        android:layout_width="350px"
+        android:layout_height="780px">
+        <TextView
+            android:text="Username"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="270px"
+            android:layout_height="150px"
+            android:id="@+id/acctUser" />
+        <TextView
+            android:text="Sex"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="270px"
+            android:layout_height="150px"
+            android:id="@+id/acctSex" />
+        <TextView
+            android:text="Email"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="270px"
+            android:layout_height="150px"
+            android:id="@+id/acctEmail" />
+
+    </LinearLayout>
+        <LinearLayout
+        android:orientation="vertical"
+        android:translationY="685px"
+        android:translationX="356px"
+        android:layout_width="710px"
+        android:layout_height="780px">
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="670px"
+            android:layout_height="150px"
+            android:gravity="center_vertical|right"
+            android:id="@+id/showUser" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="670px"
+            android:layout_height="150px"
+            android:gravity="center_vertical|right"
+            android:id="@+id/showSex" />
+        <TextView
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="670px"
+            android:layout_height="150px"
+            android:gravity="center_vertical|right"
+            android:id="@+id/showEmail" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.ContentFrameLayout>
