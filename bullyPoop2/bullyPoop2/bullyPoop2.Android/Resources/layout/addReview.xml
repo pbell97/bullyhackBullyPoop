@@ -96,31 +96,33 @@
 		android:id="@+id/buttonSubmitAddReview" />
 
 
+
 	<LinearLayout
+		android:background = "#800000"
 		android:orientation="horizontal"
-		android:translationY="640px"
-		android:minWidth="25px"
-		android:minHeight="25px"
+        android:translationY="510px"
 		android:layout_width="match_parent"
-		android:layout_height="200px"
-		android:id="@+id/linearLayoutAddReview4">
+		android:layout_height="1200px">
 		<Button
-			android:text="Home"
+			android:text=""
+			android:background="@drawable/ic_home"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonHomeAddReview" />
+			android:layout_height="230px"
+			android:id="@+id/buttonHome" />
 		<Button
-			android:text="Map"
-			android:translationX="200px"
+			android:text=""
+			android:background="@drawable/ic_map"
+            android:translationX="200px"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonMapAddReview" />
+			android:layout_height="250px"
+			android:id="@+id/buttonMap" />
 		<Button
-			android:text="Account"
-			android:translationX="380px"
+			android:text=""
+			android:background="@drawable/ic_account"
+            android:translationX="380px"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonAccountAddReview" />
+			android:layout_height="250px"
+			android:id="@+id/buttonAccount" />
 	</LinearLayout>
 
 </LinearLayout>

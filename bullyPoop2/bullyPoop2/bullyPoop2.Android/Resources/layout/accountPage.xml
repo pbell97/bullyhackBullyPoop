@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <android.support.v7.widget.ContentFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:minWidth="25px"
@@ -7,27 +7,60 @@
     android:layout_height="match_parent"
     android:id="@+id/contentFrameLayout1">
     <LinearLayout
+        android:background = "#800000"
         android:orientation="horizontal"
-        android:translationY="1520px"
-        android:translationX="15px"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200px"
         android:minWidth="125px"
         android:minHeight="25px">
         <Button
-            android:text="Log Out"
+            android:text="Delete Account"
+            
+            android:translationX="50px"
+            android:translationY="10px"
             android:layout_width="wrap_content"
             android:layout_height="150px"
-            android:minWidth="615px"
+            android:minWidth="315px"
             android:minHeight="25px"
-            android:id="@+id/logOut" />
+            android:id="@+id/delAcc" />
         <Button
-            android:text="Delete Account"
-            android:layout_width="wrap_content"
+            android:text="Log Out"
+            android:translationX="70px"
+            android:translationY="10px"
+            android:layout_width="615px"
             android:layout_height="150px"
             android:minWidth="25px"
             android:minHeight="25px"
-            android:id="@+id/delAcc" />
+            android:id="@+id/logOut" />
+    </LinearLayout>
+
+    <LinearLayout
+		android:background = "#800000"
+		android:orientation="horizontal"
+        android:translationY="1440px"
+		android:layout_width="match_parent"
+		android:layout_height="1200px"
+		android:id="@+id/linearLayout2" >
+		<Button
+			android:text=""
+			android:background="@drawable/ic_home"
+			android:layout_width="wrap_content"
+			android:layout_height="230px"
+			android:id="@+id/buttonHome" />
+		<Button
+			android:text=""
+			android:background="@drawable/ic_map"
+            android:translationX="200px"
+			android:layout_width="wrap_content"
+			android:layout_height="250px"
+			android:id="@+id/buttonMap" />
+		<Button
+			android:text=""
+			android:background="@drawable/ic_account_active"
+            android:translationX="380px"
+			android:layout_width="wrap_content"
+			android:layout_height="250px"
+			android:id="@+id/buttonAccount" />
     </LinearLayout>
 
     <LinearLayout

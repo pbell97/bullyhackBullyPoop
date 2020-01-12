@@ -8,21 +8,30 @@
 	android:id="@+id/contentFrameLayout1" >
 	<LinearLayout
 		android:orientation="horizontal"
+		android:background = "#800000"
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="200px"
 		android:id="@+id/linearLayout1">
 		<Button
+			android:background = "#800000"
 			android:text="Add Review"
-			android:layout_width="300px"
+			android:textColor="#FFFFFF"
+			android:textSize="8pt"
+			android:layout_width="400px"
 			android:layout_height="200px"
 			android:id="@+id/buttonAddReviewHomePage" />
-		<Button
-			android:text="Register Bathroom"
-			android:layout_width="115.8dp"
-			android:layout_height="match_parent"
-			android:id="@+id/buttonAddBathroom" />
+        <Button
+            android:background = "#800000"
+            android:text="Register Bathroom"
+			android:textColor="#FFFFFF"
+			android:textSize="8pt"
+            android:layout_width="720px"
+            android:layout_height="match_parent"
+            android:id="@+id/buttonAddBathroom"
+            android:layout_marginLeft="0.0dp"
+            android:layout_marginRight="151.6dp" />
 	</LinearLayout>
     
 	<ListView
@@ -34,29 +43,33 @@
 		android:id="@+id/homePageBathroomsList" />
 
 	<LinearLayout
+		android:background = "#800000"
 		android:orientation="horizontal"
-        android:translationY="1520px"
-		android:minWidth="25px"
+        android:translationY="1450px"
+		android:minWidth="125px"
 		android:minHeight="25px"
 		android:layout_width="match_parent"
-		android:layout_height="200px"
+		android:layout_height="1200px"
 		android:id="@+id/linearLayout2" >
 		<Button
-			android:text="Home"
+			android:text=""
+			android:background="@drawable/ic_home_active"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
+			android:layout_height="230px"
 			android:id="@+id/buttonHome" />
 		<Button
-			android:text="Map"
+			android:text=""
+			android:background="@drawable/ic_map"
             android:translationX="200px"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
+			android:layout_height="250px"
 			android:id="@+id/buttonMap" />
 		<Button
-			android:text="Account"
+			android:text=""
+			android:background="@drawable/ic_account"
             android:translationX="380px"
 			android:layout_width="wrap_content"
-			android:layout_height="150px"
+			android:layout_height="250px"
 			android:id="@+id/buttonAccount" />
     </LinearLayout>
 	

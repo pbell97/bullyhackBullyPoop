@@ -105,6 +105,17 @@ namespace bullyPoop2.Droid
         {
             SetContentView(Resource.Layout.registerBathroom);
             var registerButton = FindViewById<Button>(Resource.Id.buttonRegisterBathroom);
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
 
             registerButton.Click += (sender, e) =>
             {
@@ -141,6 +152,17 @@ namespace bullyPoop2.Droid
 
             spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(this.spinnerAddReviewBuildingSelected);
 
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
 
 
             var submitButton = FindViewById<Button>(Resource.Id.buttonSubmitAddReview);
@@ -218,6 +240,13 @@ namespace bullyPoop2.Droid
             var showUser = FindViewById<TextView>(Resource.Id.showUser);
             var showSex = FindViewById<TextView>(Resource.Id.showSex);
             var showEmail = FindViewById<TextView>(Resource.Id.showEmail);
+
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
 
             showUser.Text = currentUser[0].username;
             showSex.Text = currentUser[0].sex;
