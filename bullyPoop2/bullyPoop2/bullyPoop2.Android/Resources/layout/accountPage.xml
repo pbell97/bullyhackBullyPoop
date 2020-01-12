@@ -91,7 +91,7 @@
     </LinearLayout>
         <LinearLayout
         android:orientation="vertical"
-        android:translationY="685px"
+        android:translationY="885px"
         android:translationX="356px"
         android:layout_width="710px"
         android:layout_height="780px">
@@ -119,32 +119,7 @@
 
     </LinearLayout>
 
-	<LinearLayout
-		android:orientation="horizontal"
-		android:translationY="1500px"
-		android:minWidth="25px"
-		android:minHeight="25px"
-		android:layout_width="match_parent"
-		android:layout_height="200px"
-		android:id="@+id/linearLayoutAddReview4">
-		<Button
-			android:text="Home"
-			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonHomeAccountPage" />
-		<Button
-			android:text="Map"
-			android:translationX="200px"
-			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonMapAccountPage" />
-		<Button
-			android:text="Account"
-			android:translationX="380px"
-			android:layout_width="wrap_content"
-			android:layout_height="150px"
-			android:id="@+id/buttonAccountAccountPage" />
-	</LinearLayout>
+	
     <LinearLayout
 		android:orientation="horizontal"
 		android:translationY="200px"
