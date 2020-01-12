@@ -24,6 +24,7 @@ namespace bullyPoop2.Droid
         protected override void OnCreate(Bundle savedInstanceState)
         {
             allBathrooms = new List<Bathroom>();
+            allBathrooms.Add(new Bathroom("Union", 1, 1, true, 4, 4));
             buildings = new List<string>();
             reviews = new List<Review>();
             base.OnCreate(savedInstanceState);
