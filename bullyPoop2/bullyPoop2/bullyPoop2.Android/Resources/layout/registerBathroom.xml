@@ -151,26 +151,25 @@
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="200px"
-		android:id="@+id/linearLayout21"
-		android:baselineAligned="true"
-		android:foreground="#ffe65100">
+		android:id="@+id/linearLayoutRegisterBathroom"
+		android:baselineAligned="true">
 		<Button
 			android:text="Home"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button11" />
+			android:id="@+id/homeButtonRegisterBathroom" />
 		<Button
 			android:text="Map"
 			android:translationX="200px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button21" />
+			android:id="@+id/mapButtonRegisterBathroom" />
 		<Button
 			android:text="Account"
 			android:translationX="380px"
 			android:layout_width="wrap_content"
 			android:layout_height="150px"
-			android:id="@+id/button31" />
+			android:id="@+id/accountButtonRegisterBathroom" />
 	</LinearLayout>
 	
 	

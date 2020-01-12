@@ -17,7 +17,7 @@
 			android:text="Add Review"
 			android:layout_width="300px"
 			android:layout_height="200px"
-			android:id="@+id/button4" />
+			android:id="@+id/buttonAddReviewHomePage" />
 		<Button
 			android:text="Register Bathroom"
 			android:layout_width="115.8dp"

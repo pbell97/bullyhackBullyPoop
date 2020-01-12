@@ -18,11 +18,14 @@ namespace bullyPoop2.Droid
     {
         List<Bathroom> allBathrooms;
         List<string> buildings;
+        List<Review> reviews;
 
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             allBathrooms = new List<Bathroom>();
+            buildings = new List<string>();
+            reviews = new List<Review>();
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -37,6 +40,11 @@ namespace bullyPoop2.Droid
             {
                 label.Text = "Hello there";
             };
+
+
+            this.buildings.Add("Union");
+            this.buildings.Add("Butler");
+            this.buildings.Add("Lee Hall");
 
             HomePage();
 
@@ -55,12 +63,18 @@ namespace bullyPoop2.Droid
             SetContentView(Resource.Layout.homePage);
             var bathroomListView = FindViewById<ListView>(Resource.Id.homePageBathroomsList);
             var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
+            var addReviewButton = FindViewById<Button>(Resource.Id.buttonAddReviewHomePage);
 
             addBathroomButton.Click += (sender, e) =>
             {
                 //Change Content View
                 Console.WriteLine("Clicked Add Bathroom");
                 registerBathroom();
+            };
+
+            addReviewButton.Click += (sender, e) =>
+            {
+                addReview();
             };
 
             var bathroomNames = new List<String>();
@@ -94,6 +108,7 @@ namespace bullyPoop2.Droid
                 if (building == "" || floor == "" || number == "" || stallsNumber == "" || urinalsNumber == "")
                 {
                     Console.WriteLine("A field is empty");
+                    Toast.MakeText(this, "Please fill out all fields", ToastLength.Long).Show();
                 }
                 else
                 {
@@ -110,6 +125,77 @@ namespace bullyPoop2.Droid
         public void addReview()
         {
             SetContentView(Resource.Layout.addReview);
+            var spinner = FindViewById<Spinner>(Resource.Id.spinnerBuildingAddReview);
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);
+            spinner.Adapter = adapter;
+
+            spinner.ItemSelected += new EventHandler<AdapterView.ItemSelectedEventArgs>(this.spinnerAddReviewBuildingSelected);
+
+
+
+            var submitButton = FindViewById<Button>(Resource.Id.buttonSubmitAddReview);
+            submitButton.Click += (sender, e) =>
+            {
+                //Validation here
+                string reviewText = FindViewById<EditText>(Resource.Id.inputReviewAddReview).Text;
+                if (FindViewById<EditText>(Resource.Id.inputRatingAddReview).Text == "" || reviewText == "")
+                {
+                    Toast.MakeText(this, "Please fill out all fields", ToastLength.Long).Show();
+                    return;
+                }
+                int rating = Int32.Parse(FindViewById<EditText>(Resource.Id.inputRatingAddReview).Text);
+
+
+                var bathroomSpinner = FindViewById<Spinner>(Resource.Id.spinnerBathroomAddReview);
+                Spinner spinner2 = (Spinner)bathroomSpinner;
+                var selectedBathroom = spinner2.SelectedItem.ToString();
+
+                var building = selectedBathroom.Split(" - Floor ")[0];
+                var temp = selectedBathroom.Split(" - Floor ")[1].Split(" - #");
+                var floor = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[0]);
+                var number = 1;
+                Bathroom reviewedBathroom = null;
+                if (selectedBathroom.Split(" - Floor ")[1].Split(" - #").Length > 1)
+                {
+                    number = Int32.Parse(selectedBathroom.Split(" - Floor ")[1].Split(" - #")[1]);
+                } 
+                for (var i = 0; i < allBathrooms.Count; i++)
+                {
+                    if (allBathrooms[i].building == building && allBathrooms[i].floor == floor && allBathrooms[i].number == number)
+                    {
+                        reviewedBathroom = allBathrooms[i];
+                        continue;
+                    }
+                }
+                Review review = new Review(building, reviewedBathroom, rating, reviewText);
+                reviews.Add(review);
+                HomePage();
+
+            };
+
+        }
+
+        private void spinnerAddReviewBuildingSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            Spinner spinner = (Spinner)sender;
+            var selectedBuilding = spinner.GetItemAtPosition(e.Position);
+            Console.WriteLine("User selected " + selectedBuilding);
+
+            // Updates list of bathrooms based on building
+            var bathroomNames = new List<string>();
+            for (var i = 0; i < allBathrooms.Count; i++)
+            {
+                if (allBathrooms[i].building == selectedBuilding.ToString())
+                {
+                    var name = allBathrooms[i].building + " - Floor " + allBathrooms[i].floor;
+                    if (allBathrooms[i].number > 1) name += " - #" + allBathrooms[i].number;
+                    bathroomNames.Add(name);
+                }
+            }
+
+            var spinner2 = FindViewById<Spinner>(Resource.Id.spinnerBathroomAddReview);
+            ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, bathroomNames);
+            spinner2.Adapter = adapter;
         }
 
     }

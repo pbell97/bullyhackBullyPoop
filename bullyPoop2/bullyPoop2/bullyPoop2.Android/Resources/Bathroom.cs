@@ -1,4 +1,6 @@
 ﻿using System;
+using MassTransit;
+
 namespace bullyPoop2.Droid.Resources
 {
     public class Bathroom
@@ -24,6 +26,7 @@ namespace bullyPoop2.Droid.Resources
             this.handicap = handicap;
             this.stalls = stalls;
             this.urinals = urinals;
+            this.UID = NewId.Next().ToString();
         }
     }
 }
