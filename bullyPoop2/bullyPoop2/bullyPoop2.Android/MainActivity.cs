@@ -146,6 +146,17 @@ namespace bullyPoop2.Droid
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);
             buildingSpinner.Adapter = adapter;
 
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
+
             registerButton.Click += (sender, e) =>
             {
                 var building = buildingSpinner.SelectedItem.ToString();
@@ -185,6 +196,18 @@ namespace bullyPoop2.Droid
             //FindViewById<Button>(Resource.Id.buttonHomeAddReview).Click += (sender, e) => { HomePage(); };
             //FindViewById<Button>(Resource.Id.buttonMapAddReview).Click += (sender, e) => { mapPage(); };
             //FindViewById<Button>(Resource.Id.buttonAccountAddReview).Click += (sender, e) => { accountPage(); };
+
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
+
 
             var spinner = FindViewById<Spinner>(Resource.Id.spinnerBuildingAddReview);
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);
@@ -248,11 +271,6 @@ namespace bullyPoop2.Droid
         {
             SetContentView(Resource.Layout.accountPage);
 
-            // Navbar
-            FindViewById<Button>(Resource.Id.buttonHomeAccountPage).Click += (sender, e) => { HomePage(); };
-            FindViewById<Button>(Resource.Id.buttonMapAccountPage).Click += (sender, e) => { mapPage(); };
-            FindViewById<Button>(Resource.Id.buttonAccountAccountPage).Click += (sender, e) => { accountPage(); };
-
 
             var showUser = FindViewById<TextView>(Resource.Id.showUser);
             var showSex = FindViewById<TextView>(Resource.Id.showSex);
@@ -261,6 +279,12 @@ namespace bullyPoop2.Droid
             showUser.Text = currentUser.username;
             showSex.Text = currentUser.sex;
             showEmail.Text = currentUser.email;
+
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
 
 
             var listView = FindViewById<ListView>(Resource.Id.reviewsListAccountPage);
@@ -316,14 +340,25 @@ namespace bullyPoop2.Droid
             SetContentView(Resource.Layout.viewReviews);
 
             // Navbar
-            FindViewById<Button>(Resource.Id.buttonHomeViewReview).Click += (sender, e) => { HomePage(); };
-            FindViewById<Button>(Resource.Id.buttonMapViewReview).Click += (sender, e) => { mapPage(); };
-            FindViewById<Button>(Resource.Id.buttonAccountViewReview).Click += (sender, e) => { accountPage(); };
+            //FindViewById<Button>(Resource.Id.buttonHomeViewReview).Click += (sender, e) => { HomePage(); };
+            //FindViewById<Button>(Resource.Id.buttonMapViewReview).Click += (sender, e) => { mapPage(); };
+            //FindViewById<Button>(Resource.Id.buttonAccountViewReview).Click += (sender, e) => { accountPage(); };
 
             FindViewById<TextView>(Resource.Id.bathroomNameViewReviews).Text = createBathroomName(bathroom);
             string stars = string.Join("", Enumerable.Repeat("🚽", bathroom.getAvgRating(reviews)));
             if (stars == "") stars = "0 Toilets Stars";
             FindViewById<TextView>(Resource.Id.bathroomRating).Text = "Rating: " + stars;
+
+            var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+            var addHomeButton = FindViewById<Button>(Resource.Id.buttonHome);
+            addAccountButton.Click += (sender, e) =>
+            {
+                accountPage();
+            };
+            addHomeButton.Click += (sender, e) =>
+            {
+                HomePage();
+            };
 
             var reviewsListView = FindViewById<ListView>(Resource.Id.reviewsListViewReviews);
             var reviewsToAdd = new List<string>();
