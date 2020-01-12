@@ -54,7 +54,7 @@ namespace bullyPoop2.Droid
 
             //webHelper.postRequest("/bathrooms", JsonConvert.SerializeObject(allBathrooms[0]));
 
-            if (currentUser == null) currentUser = new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
+            if (currentUser == null) currentUser = new User("Bully", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
             storageHelper.StoreItem<User>("currentUser", currentUser);
 
             // TODO: Should be populated by database...
@@ -137,9 +137,9 @@ namespace bullyPoop2.Droid
             SetContentView(Resource.Layout.registerBathroom);
 
             // Navbar
-            FindViewById<Button>(Resource.Id.homeButtonRegisterBathroom).Click += (sender, e) => { HomePage(); };
-            FindViewById<Button>(Resource.Id.mapButtonRegisterBathroom).Click += (sender, e) => { mapPage(); };
-            FindViewById<Button>(Resource.Id.accountButtonRegisterBathroom).Click += (sender, e) => { accountPage(); };
+            //FindViewById<Button>(Resource.Id.homeButtonRegisterBathroom).Click += (sender, e) => { HomePage(); };
+            //FindViewById<Button>(Resource.Id.mapButtonRegisterBathroom).Click += (sender, e) => { mapPage(); };
+            //FindViewById<Button>(Resource.Id.accountButtonRegisterBathroom).Click += (sender, e) => { accountPage(); };
 
             var registerButton = FindViewById<Button>(Resource.Id.buttonRegisterBathroom);
             var buildingSpinner = FindViewById<Spinner>(Resource.Id.buildingSpinnerRegisterBathroom);
@@ -182,9 +182,9 @@ namespace bullyPoop2.Droid
             SetContentView(Resource.Layout.addReview);
 
             // Navbar
-            FindViewById<Button>(Resource.Id.buttonHomeAddReview).Click += (sender, e) => { HomePage(); };
-            FindViewById<Button>(Resource.Id.buttonMapAddReview).Click += (sender, e) => { mapPage(); };
-            FindViewById<Button>(Resource.Id.buttonAccountAddReview).Click += (sender, e) => { accountPage(); };
+            //FindViewById<Button>(Resource.Id.buttonHomeAddReview).Click += (sender, e) => { HomePage(); };
+            //FindViewById<Button>(Resource.Id.buttonMapAddReview).Click += (sender, e) => { mapPage(); };
+            //FindViewById<Button>(Resource.Id.buttonAccountAddReview).Click += (sender, e) => { accountPage(); };
 
             var spinner = FindViewById<Spinner>(Resource.Id.spinnerBuildingAddReview);
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, this.buildings);

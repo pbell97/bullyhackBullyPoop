@@ -145,12 +145,21 @@
 			android:layout_height="150px"
 			android:id="@+id/buttonAccountAccountPage" />
 	</LinearLayout>
+    <LinearLayout
+		android:orientation="horizontal"
+		android:translationY="200px"
+		android:minWidth="25px"
+		android:minHeight="25px"
+		android:layout_width="match_parent"
+		android:layout_height="650px"
+		android:id="@+id/linearLayoutAddReview40">
 	<ListView
 		android:minWidth="25px"
 		android:minHeight="25px"
 		android:layout_width="match_parent"
 		android:layout_height="850px"
 		android:id="@+id/reviewsListAccountPage" />
+    </LinearLayout>
 
 
 </android.support.v7.widget.ContentFrameLayout>
