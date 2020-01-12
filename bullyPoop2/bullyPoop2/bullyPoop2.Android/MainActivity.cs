@@ -32,9 +32,13 @@ namespace bullyPoop2.Droid
             currentUser = new User("poopmaster69", "M", "mrpoopy@gmail.com", 420, "Allen Hall - 1st Floor");
 
             base.OnCreate(savedInstanceState);
+            
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            Xamarin.FormsMaps.Init(this, savedInstanceState);
+
             LoadApplication(new App());
 
             SetContentView(Resource.Layout.mainLayout);
@@ -70,6 +74,7 @@ namespace bullyPoop2.Droid
             var addBathroomButton = FindViewById<Button>(Resource.Id.buttonAddBathroom);
             var addReviewButton = FindViewById<Button>(Resource.Id.buttonAddReviewHomePage);
             var addAccountButton = FindViewById<Button>(Resource.Id.buttonAccount);
+            var addMapButton = FindViewById<Button>(Resource.Id.buttonMap);
             addBathroomButton.Click += (sender, e) =>
             {
                 //Change Content View
@@ -80,6 +85,10 @@ namespace bullyPoop2.Droid
             addReviewButton.Click += (sender, e) =>
             {
                 addReview();
+            };
+            addMapButton.Click += (sender, e) =>
+            {
+                mapPage();
             };
             addAccountButton.Click += (sender, e) =>
             {
@@ -197,6 +206,13 @@ namespace bullyPoop2.Droid
             var spinner2 = FindViewById<Spinner>(Resource.Id.spinnerBathroomAddReview);
             ArrayAdapter<string> adapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, bathroomNames);
             spinner2.Adapter = adapter;
+        }
+
+        public void mapPage()
+        {
+            SetContentView(Resource.Layout.Page2);
+
+           
         }
 
         public void accountPage()
